@@ -1,5 +1,7 @@
 package com.miapp.modelo;
 
+import java.util.List;
+
 /**
  * Modelo: representa la entidad Estudiante.
  */
@@ -15,6 +17,7 @@ public class Estudiante extends Persona {
     private String carrera;
     private double promedio;
 
+    private List<Curso> cursos;
     // ── Constructor ───────────────────────────────────────────────────────────
 
     public Estudiante(int id, String nombre, String apellido, String carrera, double promedio) {
@@ -77,11 +80,15 @@ public class Estudiante extends Persona {
      Método final: no puede ser sobrescrito por subclases
      * 
      */
-    @return 
-    @Override
+      @Override
     public final String toString() {
-        return   
-              " | Carrera: " + carrera
+        return super.toString()
+             + " | Carrera: " + carrera
              + " | Promedio: " + String.format("%.2f", promedio);
+    }
+
+    @Override
+    public double calcularPago() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

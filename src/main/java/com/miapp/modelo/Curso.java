@@ -1,29 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.miapp.modelo;
 
-/**
- *
- * @author Estudiante
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
-    
-    private String codigos;
+
+    private String codigo;
     private int creditos;
 
-    public Curso(String codigos, int creditos) {
-        this.codigos = codigos;
+    private List<Estudiante> estudiantes;
+
+    public Curso(String codigo, int creditos) {
+        this.codigo = codigo;
         this.creditos = creditos;
+        this.estudiantes = new ArrayList<>();
     }
 
-    public String getCodigos() {
-        return codigos;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodigos(String codigos) {
-        this.codigos = codigos;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public int getCreditos() {
@@ -33,6 +31,21 @@ public class Curso {
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
-    
-    
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public boolean agregarEstudiante(Estudiante estudiante) {
+        if (estudiante != null && !estudiantes.contains(estudiante)) {
+            return estudiantes.add(estudiante);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Curso: " + codigo + " | Créditos: " + creditos
+             + " | Estudiantes inscritos: " + estudiantes.size();
+    }
 }

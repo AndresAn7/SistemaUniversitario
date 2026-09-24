@@ -8,26 +8,22 @@ package com.miapp.modelo;
  *
  * @author Estudiante
  */
-public class Profesor extends Persona {
+public abstract class Profesor extends Persona {
     
-    private final double salarioBase = 0;
+    private final double salarioBase;
 
-    public Profesor(String nombre, String apellido, int id) {
-        super(nombre, apellido, id);
-    }
+    public Profesor(String nombre, String apellido, int id, double salarioBase) {
+    super(nombre, apellido, id);
+    this.salarioBase = salarioBase;
+}
 
-    
-    public int getId() {
-        return id;
-    }
+public double getSalarioBase() {
+    return salarioBase;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+}
 
-   public void impartirClase() {
-   
-   }
-    
-    
+public void impartirClase() {
+    System.out.println(getNombre() + " " + getApellido() + " está impartiendo su clase.");
+}
+
 }

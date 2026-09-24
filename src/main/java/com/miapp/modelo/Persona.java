@@ -42,13 +42,10 @@ public abstract class Persona {
     }
    
     
-    public void calcularPago() {
-    
-    
-    }
+    public abstract double calcularPago();
     
     @Override
-    public final String toString() {
+    public String toString() {
         return "ID: " + id
              + " | Nombre: " + nombre
              + " | Apellido: " + apellido;
