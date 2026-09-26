@@ -1,4 +1,12 @@
-C:\Users\taidy\Documents\UDC\POO\SistemaUniversitario\src\main\java\com\miapp\modelo\Estudiante.java
-C:\Users\taidy\Documents\UDC\POO\SistemaUniversitario\src\main\java\com\miapp\vista\EstudianteView.java
-C:\Users\taidy\Documents\UDC\POO\SistemaUniversitario\src\main\java\com\miapp\controlador\EstudianteController.java
-C:\Users\taidy\Documents\UDC\POO\SistemaUniversitario\src\main\java\com\miapp\SistemaUniversitario.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\controlador\EstudianteController.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\controlador\GestionController.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\modelo\Curso.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\modelo\Estudiante.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\modelo\Persona.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\modelo\Profesor.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\servicios\IBuscador.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\servicios\Inscribible.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\SistemaUniversitario.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\utilidades\EstadoMatricula.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\vista\EstudianteView.java
+C:\Users\Grogu\Documents\GitHub\SistemaUniversitario\src\main\java\com\miapp\vista\GestionView.java

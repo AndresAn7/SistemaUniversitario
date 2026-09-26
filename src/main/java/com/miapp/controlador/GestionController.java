@@ -4,6 +4,7 @@ import com.miapp.modelo.Curso;
 import com.miapp.modelo.Estudiante;
 import com.miapp.modelo.Profesor;
 import com.miapp.vista.GestionView;
+import com.miapp.utilidades.EstadoMatricula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class GestionController {
     private static final String MSG_MATRICULA_EXITOSA = "Matrícula realizada correctamente.";
     private static final String MSG_MATRICULA_FALLIDA =
             "No se pudo matricular (curso ya inscrito o se alcanzó MAX_MATERIAS).";
-
+    private static final String MSG_ESTADO_ACTUALIZADO = "Estado de matrícula actualizado correctamente.";
     private final EstudianteController estudianteController;
     private final List<Curso> cursos;
     private final List<Profesor> profesores;
@@ -116,4 +117,21 @@ public class GestionController {
         }
         return matriculado;
     }
+
+    // ── Estado de matrícula ──────────────────────────────────────────────────
+
+    public boolean cambiarEstadoMatricula(int idEstudiante, EstadoMatricula nuevoEstado) {
+        boolean cambiado = estudianteController.cambiarEstado(idEstudiante, nuevoEstado);
+        if (cambiado) {
+            vista.mostrarMensaje(MSG_ESTADO_ACTUALIZADO);
+        } else {
+            vista.mostrarError(MSG_ESTUDIANTE_NO_ENCONTRADO);
+    }
+        return cambiado;
+}
+
+    public List<Estudiante> buscarPorEstado(EstadoMatricula estado) {
+        return estudianteController.obtenerEstudiantesPorEstado(estado);
+}
+
 }

@@ -2,11 +2,14 @@ package com.miapp.vista;
 
 import com.miapp.controlador.GestionController;
 import com.miapp.modelo.Curso;
+import com.miapp.modelo.Estudiante;
 import com.miapp.modelo.Profesor;
+import com.miapp.utilidades.EstadoMatricula;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class GestionView extends JFrame {
 
@@ -15,6 +18,7 @@ public class GestionView extends JFrame {
 
     private static final String[] COLUMNAS_CURSO = {"Código", "Créditos", "Estudiantes inscritos"};
     private static final String[] COLUMNAS_PROFESOR = {"ID", "Nombre", "Apellido", "Salario base"};
+    private static final String[] COLUMNAS_ESTADO = {"ID", "Nombre", "Apellido", "Carrera", "Estado"};
 
     private GestionController controlador;
 
@@ -34,6 +38,12 @@ public class GestionView extends JFrame {
     private JTextField txtIdEstudianteMatricula;
     private JTextField txtCodigoCursoMatricula;
     private JLabel lblEstadoMatricula;
+    
+    // Estado de matrícula
+    private JTextField txtIdEstudianteEstado;
+    private JComboBox<EstadoMatricula> cmbNuevoEstado;
+    private JComboBox<EstadoMatricula> cmbBuscarEstado;
+    private DefaultTableModel modeloTablaEstado;
 
     public GestionView() {
         setTitle("Gestión Académica — Cursos, Profesores y Matrícula");
@@ -45,6 +55,7 @@ public class GestionView extends JFrame {
         tabs.addTab("Cursos", crearPanelCursos());
         tabs.addTab("Profesores", crearPanelProfesores());
         tabs.addTab("Matrícula", crearPanelMatricula());
+        tabs.addTab("Estado Matrícula", crearPanelEstado());    
 
         add(tabs);
     }
@@ -198,6 +209,69 @@ public class GestionView extends JFrame {
         }
     }
 
+    
+    // ── Panel Estado Matrícula ───────────────────────────────────────────────
+
+private JPanel crearPanelEstado() {
+    JPanel panel = new JPanel(new BorderLayout(10, 10));
+
+    // Fila para cambiar el estado de un estudiante puntual
+    JPanel formCambiar = new JPanel();
+    formCambiar.add(new JLabel("ID Estudiante:"));
+    txtIdEstudianteEstado = new JTextField(4);
+    formCambiar.add(txtIdEstudianteEstado);
+    formCambiar.add(new JLabel("Nuevo estado:"));
+    cmbNuevoEstado = new JComboBox<>(EstadoMatricula.values());
+    formCambiar.add(cmbNuevoEstado);
+    JButton btnCambiar = new JButton("Cambiar estado");
+    btnCambiar.addActionListener(e -> cambiarEstado());
+    formCambiar.add(btnCambiar);
+
+    // Fila para buscar estudiantes por estado
+    JPanel formBuscar = new JPanel();
+    formBuscar.add(new JLabel("Buscar por estado:"));
+    cmbBuscarEstado = new JComboBox<>(EstadoMatricula.values());
+    formBuscar.add(cmbBuscarEstado);
+    JButton btnBuscar = new JButton("Buscar");
+    btnBuscar.addActionListener(e -> buscarPorEstado());
+    formBuscar.add(btnBuscar);
+
+    JPanel formularios = new JPanel(new GridLayout(2, 1));
+    formularios.add(formCambiar);
+    formularios.add(formBuscar);
+
+    modeloTablaEstado = new DefaultTableModel(COLUMNAS_ESTADO, 0);
+    JTable tabla = new JTable(modeloTablaEstado);
+
+    panel.add(formularios, BorderLayout.NORTH);
+    panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
+    return panel;
+}
+
+private void cambiarEstado() {
+    try {
+        int idEstudiante = Integer.parseInt(txtIdEstudianteEstado.getText().trim());
+        EstadoMatricula nuevoEstado = (EstadoMatricula) cmbNuevoEstado.getSelectedItem();
+        if (controlador.cambiarEstadoMatricula(idEstudiante, nuevoEstado)) {
+            txtIdEstudianteEstado.setText("");
+            buscarPorEstado();
+        }
+    } catch (NumberFormatException ex) {
+        mostrarError("El ID del estudiante debe ser numérico.");
+    }
+}
+
+private void buscarPorEstado() {
+    EstadoMatricula estado = (EstadoMatricula) cmbBuscarEstado.getSelectedItem();
+    List<Estudiante> resultados = controlador.buscarPorEstado(estado);
+
+    modeloTablaEstado.setRowCount(0);
+    for (Estudiante e : resultados) {
+        modeloTablaEstado.addRow(new Object[]{
+                e.getId(), e.getNombre(), e.getApellido(), e.getCarrera(), e.getEstado()
+        });
+    }
+}
     // ── Métodos que el Controlador llama para mostrar resultados ────────────────
 
     public void mostrarMensaje(String mensaje) {

@@ -3,6 +3,7 @@ package com.miapp.controlador;
 import com.miapp.modelo.Estudiante;
 import com.miapp.servicios.IBuscador;
 import com.miapp.vista.EstudianteView;
+import com.miapp.utilidades.EstadoMatricula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,4 +211,27 @@ public class EstudianteController implements IBuscador {
 
         return true;
     }
+    
+    // ── Estado de matrícula ──────────────────────────────────────────────────
+
+    public boolean cambiarEstado(int id, EstadoMatricula nuevoEstado) {
+        Estudiante estudiante = obtenerEstudiantePorId(id);
+        if (estudiante == null) {
+            return false;
+    }
+    estudiante.setEstado(nuevoEstado);
+        return true;
+}
+
+    public List<Estudiante> obtenerEstudiantesPorEstado(EstadoMatricula estado) {
+        List<Estudiante> resultado = new ArrayList<>();
+        for (Estudiante e : estudiantes) {
+            if (e != null && e.getEstado() == estado) {
+                resultado.add(e);
+        }
+    }
+        return resultado;
+}
+    
+    
 }
