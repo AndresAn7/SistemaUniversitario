@@ -1,6 +1,7 @@
 package com.miapp.modelo;
 
 import com.miapp.servicios.Inscribible;
+import com.miapp.utilidades.EstadoMatricula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Estudiante extends Persona implements Inscribible {
 
     // Lado de la asociación N:M: los cursos en los que está inscrito.
     private List<Curso> cursos;
+    private EstadoMatricula estado;
 
     // ── Constructor ───────────────────────────────────────────────────────────
 
@@ -37,6 +39,7 @@ public class Estudiante extends Persona implements Inscribible {
         }
 
         this.cursos = new ArrayList<>();
+        this.estado = EstadoMatricula.ACTIVO;
 
         // Incrementa el contador estático de estudiantes
         totalEstudiantes++;
@@ -69,11 +72,19 @@ public class Estudiante extends Persona implements Inscribible {
     public List<Curso> getCursos() {
         return cursos;
     }
+    
+    public EstadoMatricula getEstado() {
+    return estado;
+    }
 
     // ── Setters ──────────────────────────────────────────────────────────────
 
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+    
+    public void setEstado(EstadoMatricula estado) {
+    this.estado = estado;
     }
 
     /**
@@ -136,7 +147,8 @@ public class Estudiante extends Persona implements Inscribible {
     @Override
     public final String toString() {
         return super.toString()
-             + " | Carrera: " + carrera
-             + " | Promedio: " + String.format("%.2f", promedio);
+     + " | Carrera: " + carrera
+     + " | Promedio: " + String.format("%.2f", promedio)
+     + " | Estado: " + estado;
     }
 }
